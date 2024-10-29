@@ -1,0 +1,495 @@
+/*Google Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+ margin: 0;
+ padding: 0;
+ scroll-behavior: smooth;
+ scroll-padding-top:2rem;
+ list-style:none;
+ text-decoration:none;
+ box-sizing:border-box;
+ font-family: "Poppins", sans-serif;
+}
+
+/* Body and Body Before for Review */
+body {
+    position: relative; /* new */
+    z-index: 0; /* Ensure the body is on a lower layer */
+    background-color: rgb(19, 7, 45);
+    height:100vh;
+    margin:0;
+}
+
+/* Header */
+header {
+   position: fixed;   /*changed from fixed to relative */
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(19, 7, 45);
+    padding: 18px 10%;
+    transition: 0.2s;
+}
+
+header.shadow {
+    box-shadow: 0 0 4px rgb(14 55 54 / 15%);
+}
+
+/* Logo */
+.logo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    color: white;
+    justify-content: center; /* Center aligns the navbar */
+    flex-grow: 1;
+}
+
+/* Navbar Links */
+.navbar a {
+    font-size: 1rem;
+    padding: 10px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    position: relative;
+}
+
+/* Glittery Underline Effect */
+.navbar a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(45deg, #ffdd57, #ff7730, #ff0de3, #00e1ff, #30ff57);
+    background-size: 400%;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease, background-position 0.5s ease;
+}
+
+.navbar a:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+    background-position: 200%;
+}
+
+/* Main Login Button */
+.main-login-btn {
+    -webkit-text-fill-color: rgb(19, 7, 45);
+    color: rgb(19, 7, 45);
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 50px; /* Spherical shape */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-left: auto; /* Align to the right */
+    text-align: center;
+}
+
+.main-login-btn:hover {
+    background-color: #f3f1f0; /* Hover effect */
+    color: rgb(19, 7, 45);
+}
+
+
+
+/* Heading */
+.heading {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+footer {
+    background-color: black;  /* Black background */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.footer-logo h3 {
+    font-size: 1.5rem;  /* Larger text size */
+    margin: 0;
+}
+.footer-logo h2 {
+    font-size: 2rem;  /* Larger text size */
+    margin: 0;
+}
+
+.footer-logo .deflate {
+    color: red;  /* Red for Deflate */
+}
+
+.footer-logo .pro {
+    color: white;  /* White for Pro */
+}
+/* Glassmorphism Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1); /* White with some transparency */
+    border-radius: 20px; /* Rounded corners */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    padding: 40px; /* Increase padding for larger size */
+    color: white; /* Text color */
+    width: 100%; /* Full width */
+    height: calc(100vh - 60px); /* Fill the viewport height minus header */
+    max-width: 1400px; /* Set a max width for large screens */
+    position: absolute; /* Position it absolutely */
+    top: 120px; /* Push down below the header */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Center it perfectly */
+    overflow: auto; /* Allow scrolling if content exceeds height */
+}
+.glass p {
+    text-align: left; /* Align text to the left */
+    margin: 0; /* Optional: Remove any default margin */
+    display:block; 
+    font-size:20px;
+}
+.glass #divbab{
+    margin-top: 15px;
+}
+.glass h1{
+    margin-top:100px;
+}
+.calculate-button{
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: white;
+    color: black;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-left:0px;
+    margin-top:10px;
+    z-index:10000;
+}
+
+.calculate-button:hover {
+    background-color: #f0f0f0;
+}
+.calculate-buttonheader {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: white;
+    color: black;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    
+}
+
+.calculate-buttonheader:hover {
+    background-color: #f0f0f0;
+}
+/* .arrow-container {
+    background-color: rgb(8, 8, 8);
+    border-radius: 50%;
+    width: 30px; 
+    height: 30px; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    transition: margin-left 0.3s;
+} */
+
+.calculate-button:hover .arrow-container {
+    margin-left: 15px;
+}
+
+/* .arrow {
+    color: white;  Arrow color 
+    font-size: 18px;
+    
+} */
+
+/* Glassmorphism Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    color: white;
+    width: 100%;
+    height: calc(100vh - 60px);
+    max-width: 1400px;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: auto;
+    display: flex; /* Use flex to align items */
+    flex-direction: column; /* Stack items vertically */
+}
+
+/* Graph Preview Container */
+.graph-preview-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the image to the right */
+    align-items: center; /* Center align vertically */
+    position: relative; /* Required for tooltip positioning */
+    margin-top: -240px; /* negative margin-might give error*/
+}
+
+.graph-preview-container img {
+    width: 35em; /* Set the desired width */
+    height:20em; /* Maintain aspect ratio */
+    cursor: pointer; /* Show pointer on hover */
+    margin-left: 20px; /* Space between text and image */
+}
+
+/* Tooltip Styles */
+.tooltip {
+    display: none; /* Initially hide the tooltip */
+    position: absolute; /* Position the tooltip relative to the container */
+    top: -30px; /* Adjust as necessary */
+    right: 0; /* Align to the right */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+    color: white; /* Text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Show tooltip on hover */
+.graph-preview-container:hover .tooltip {
+    display: block; /* Show tooltip on hover */
+}
+/* General  calcu Styles */
+.calbody {
+    font-family: 'Arial', sans-serif;
+    /* background-color: #141414; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin-top: 210px;
+    max-width:3500px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 850px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+}
+
+/* Left side: Glassmorphism Form */
+.left-side {
+    width: 45%;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group span {
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px 0 0 5px;
+}
+
+input[type="number"], input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-color: #202020;
+    color: #ffffff;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6200EA;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5B00D1;
+}
+
+/* Smaller Toggle Button */
+.small-button {
+    padding: 5px 10px;
+    background-color: #B400FF;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.small-button:hover {
+    background-color: #9E00E3;
+}
+
+/* Right side: Glassmorphism Results & Responsive Battery */
+.right-side {
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(7px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Battery meter */
+.result-battery {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#battery {
+    width: 100px; /* Increase battery width */
+    height: 160px;
+    background-color: #000;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 4px solid #888;
+}
+
+#battery::before {
+    content: '';
+    width: 90px;
+    height: 10px;
+    background-color: #000;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+#currentCostFill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%; /* Adjust based on calculation */
+    background-color: #4B0082; /* Dark violet */
+}
+
+#costIncreaseFill {
+    position: absolute;
+    bottom: 50%; /* Start above current cost fill */
+    width: 100%;
+    height: 30%; /* Adjust based on calculation */
+    background-color: #2C2C2C; /* Lightish black */
+}
+
+/* Energy Flow Animation */
+#energyFlow {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(transparent, rgba(255, 255, 255, 0.3));
+    animation: flowingEnergy 3s linear infinite;
+}
+
+@keyframes flowingEnergy {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+/* Labels and result details */
+.result-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.label-violet {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #4B0082;
+    margin-right: 5px;
+}
+
+.label-black {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #2C2C2C;
+    margin-right: 5px;
+}
+
+.result-container {
+    width: 100%;
+    border-top: 1px solid #888;
+    padding-top: 15px;
+}
+
+.result-container p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #FFF;
+}
+
+
+
+
+

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Price Trends - 2024</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Fullscreen container for particle background */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Particle container behind glassmorphism effect */
+        #particleBackground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Glassmorphism effect container */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+
+        /* Left-side insights section */
+        .info-section {
+            flex: 1;
+            margin-right: 40px;
+            padding: 20px;
+        }
+
+        .info-section h1 {
+            color: #b399ff;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .info-section h4 {
+            color: #e0e0e0;
+            font-size: 1em;
+            margin-top: -10px;
+            font-weight: normal;
+        }
+
+        .info-section p {
+            line-height: 1.5;
+            font-size: 1.1em;
+        }
+
+        /* Graph section */
+        .graph-section {
+            flex: 2;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        canvas {
+            width: 100% !important;
+            max-width: 700px;
+            background-color: #000000;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particleBackground"></div>
+
+    <!-- Content Container with Glassmorphism Effect -->
+    <div class="container">
+        <!-- Left side with detailed insights -->
+        <div class="info-section">
+            <h1>Vehicle Price Trends - 2024</h1>
+            <h4>Current country: India</h4>
+            <p>Vehicle prices are still impacted by high production costs and semiconductor shortages. In 2024, new and used car prices have stayed high, though some relief is expected as supply chains improve.</p>
+
+            <p>Electric vehicle prices have remained more stable due to rising production but increased competition. Improved battery production could further help stabilize prices over time.</p>
+            
+            <p>End-of-year sales may offer incentives on older models, making it an ideal time to consider purchases before expected price adjustments in early 2025.</p>
+        </div>
+
+        <!-- Right side with line graph -->
+        <div class="graph-section">
+            <canvas id="vehicleChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Particle background setup
+        const particleBackground = document.getElementById('particleBackground');
+        const particles = [];
+        const particleCount = 50;
+        const maxParticleSize = 6;
+
+        // Generate particles
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.style.width = particle.style.height = `${Math.random() * maxParticleSize + 3}px`;
+            particle.style.position = 'absolute';
+            particle.style.borderRadius = '50%';
+            particle.style.backgroundColor = `rgba(${150 + Math.random() * 105}, ${80 + Math.random() * 75}, 255, 0.6)`;
+            particle.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.5)'; // Subtle glow
+            particle.style.top = `${Math.random() * window.innerHeight}px`;
+            particle.style.left = `${Math.random() * window.innerWidth}px`;
+            particle.dataset.speed = (Math.random() * 0.5 + 0.5).toFixed(2);  // Random speed for slow drift effect
+            particles.push(particle);
+            particleBackground.appendChild(particle);
+        }
+
+        // Mouse movement and particle animation
+        document.addEventListener('mousemove', (event) => {
+            particles.forEach((particle) => {
+                const dx = (particle.offsetLeft - event.clientX) * 0.02;
+                const dy = (particle.offsetTop - event.clientY) * 0.02;
+                particle.style.transform = `translate(${dx}px, ${dy}px)`;
+            });
+        });
+
+        // Slow random drift effect
+        function animateParticles() {
+            particles.forEach(particle => {
+                const speed = parseFloat(particle.dataset.speed);
+                const x = parseFloat(particle.style.left) + Math.sin(Date.now() * 0.001 * speed) * 0.5;
+                const y = parseFloat(particle.style.top) + Math.cos(Date.now() * 0.001 * speed) * 0.5;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Reset particles when mouse leaves
+        document.addEventListener('mouseout', () => {
+            particles.forEach(particle => particle.style.transform = 'translate(0, 0)');
+        });
+
+        // Chart.js graph initialization
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("vehicles.php")
+                .then(response => response.json())
+                .then(data => {
+                    const months = data.map(item => item.month);
+                    const priceChanges = data.map(item => parseFloat(item.vehicle_price_change));
+
+                    const ctx = document.getElementById('vehicleChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: months,
+                            datasets: [{
+                                label: 'Vehicle Price Change (%)',
+                                data: priceChanges,
+                                borderColor: '#9b59b6',  // Violet line color
+                                borderWidth: 3,
+                                pointBackgroundColor: priceChanges.map(value =>
+                                    value > 0 ? 'red' : 'green'),
+                                pointRadius: 7,  // Increased dot size for visibility
+                                fill: false,
+                                tension: 0.4,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                tooltip: {
+                                    enabled: true,
+                                    mode: 'index',
+                                    intersect: false,
+                                    callbacks: {
+                                        title: function(tooltipItems) {
+                                            return `Month: ${tooltipItems[0].label}`;
+                                        },
+                                        label: function(context) {
+                                            const value = context.raw;
+                                            return `Price ${value > 0 ? 'Increase' : 'Decrease'}: ${value}%`;
+                                        }
+                                    }
+                                },
+                                legend: {
+                                    display: true,
+                                    labels: {
+                                        color: '#ffffff'
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: { display: true, text: 'Months', color: '#ffffff' },
+                                    ticks: { color: '#ffffff' }
+                                },
+                                y: {
+                                    title: { display: true, text: 'Price Change (%)', color: '#ffffff' },
+                                    ticks: { color: '#ffffff' }
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

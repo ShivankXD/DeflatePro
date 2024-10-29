@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inflation Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0; /* Remove default body margin */
+            overflow: hidden; /* Prevent scrolling */
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        html, body {
+            height: 100%; /* Full height */
+        }
+        canvas {
+            display: block; /* Remove inline-block spacing */
+            width: 100vw; /* Full viewport width */
+            height: 100vh; /* Full viewport height */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 10;">Inflation Adjusted Value in India (1957-2024)</h1>
+    <canvas id="inflationChart"></canvas> <!-- No width and height attributes -->
+    <script>
+        fetch('data.php')
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => item.year);
+                const values = data.map(item => item.cumulative_value);
+
+                const ctx = document.getElementById('inflationChart').getContext('2d');
+                const inflationChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Inflation Adjusted Value (₹)',
+                            data: values,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: true,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // Allow chart to adjust to canvas size
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Year'
+                                },
+                                ticks: {
+                                    stepSize: 5 // Display every 5 years
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Value (₹)'
+                                },
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + 'k'; // Display values with 'k'
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const year = context.label;
+                                        const value = context.raw;
+                                        return `Year: ${year}, Value: ₹${value}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>

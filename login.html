@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In || Sign Up</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="login-styles.css">
+</head>
+<body class="login-body" style="background-image: url('img/9205550.gif'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center center; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">>
+    <div class="login-container" id="login-container">
+        <div class="form-container sign-up-container">
+            <form action="register.php" method="post">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="login.php" method="post">
+                <h1>Sign in</h1>
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <button>Sign In</button>
+            </form>To keep connected with us please login with your personal info
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details<br/>&Get started..</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us,<br/> Please login with your personal info</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="login-script.js"></script>
+</body>
+</html>
